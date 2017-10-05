@@ -59,7 +59,7 @@
         ],
     ],
     'settings'   => [
-        'invoice_vendor'            => 'Vendor name/address',
+        'invoice_vendor'            => 'Vendor name',
         'invoice_vendor_comment'    => 'This name will be printed on the generated PDF invoices.',
         'invoice_product'           => 'Product name',
         'invoice_product_comment'   => 'This name will be printed on the generated PDF invoices.',
