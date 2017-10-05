@@ -1,0 +1,21 @@
+{% if invoices %}
+    <table class="table">
+        {% for invoice in invoices %}
+            <tr>
+                <td>{{ invoice.date.toFormattedDateString() }}</td>
+                <td>{{ invoice.total }}</td>
+                <td>
+                    <a href="#"
+                       data-request="onDownloadInvoice"
+                       data-request-data="id: '{{ invoice.asStripeInvoice.id }}'"
+                       data-request-complete="$.oc.stripeLoadIndicator.hide()"
+                    >
+                        Download
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    {% partial __SELF__ ~ '::empty.htm' %}
+{% endif %}

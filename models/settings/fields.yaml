@@ -1,0 +1,56 @@
+fields:
+    invoice_section:
+        label: offline.cashier::lang.settings.sections.invoice
+        type: section
+        comment: offline.cashier::lang.settings.sections.invoice_comment
+    invoice_vendor:
+        span: left
+        type: text
+        label: offline.cashier::lang.settings.invoice_vendor
+        comment: offline.cashier::lang.settings.invoice_vendor_comment
+    invoice_data:
+        span: right
+        type: repeater
+        label: offline.cashier::lang.settings.invoice_data
+        commentAbove: offline.cashier::lang.settings.invoice_data_comment
+        form:
+            fields:
+                key:
+                    span: left
+                    type: text
+                    label: offline.cashier::lang.settings.invoice_data_key
+                value:
+                    span: right
+                    type: text
+                    label: offline.cashier::lang.settings.invoice_data_value
+
+    invoice_product:
+        span: left
+        type: text
+        label: offline.cashier::lang.settings.invoice_product
+        comment: offline.cashier::lang.settings.invoice_product_comment
+    invoice_view:
+        span: left
+        type: text
+        default: 'offline.cashier::receipt'
+        label: offline.cashier::lang.settings.invoice_view
+        comment: offline.cashier::lang.settings.invoice_view_comment
+
+
+    currency_section:
+        label: offline.cashier::lang.settings.sections.currency
+        type: section
+        comment: offline.cashier::lang.settings.sections.currency_comment
+    currency_currency:
+        span: left
+        type: text
+        label: offline.cashier::lang.settings.currency_currency
+        placeholder: 'EUR, USD, CHF, etc.'
+        comment: offline.cashier::lang.settings.currency_currency_comment
+    currency_symbol:
+        span: right
+        type: text
+        placeholder: '€, $, CHF'
+        label: offline.cashier::lang.settings.currency_symbol
+        comment: offline.cashier::lang.settings.currency_symbol_comment
+

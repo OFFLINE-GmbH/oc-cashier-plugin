@@ -1,0 +1,13 @@
+{% put scripts %}
+<script>
+    $(function () {
+        $.request('{{ __SELF__ }}::onFetchInvoices', {
+            update: {'{{ __SELF__ }}::list': '.invoices-list'},
+            error: function (response) {
+                $('.invoices-list').html('Failed to load invoices.');
+                console.log(response);
+            }
+        })
+    })
+</script>
+{% endput %}

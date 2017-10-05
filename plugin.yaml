@@ -1,0 +1,6 @@
+plugin:
+    name: 'offline.cashier::lang.plugin.name'
+    description: 'offline.cashier::lang.plugin.description'
+    author: OFFLINE
+    icon: oc-icon-money
+    homepage: ''
