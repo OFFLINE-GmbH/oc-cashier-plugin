@@ -13,8 +13,8 @@ function stripeTokenHandler (token) {
             $submit.prop('disabled', false).text(oldSubmitText);
         },
         success: function (results) {
-            results.forEach(function(result) {
-                if(result.hasOwnProperty('redirect')) {
+            results.forEach(function (result) {
+                if (result.hasOwnProperty('redirect')) {
                     document.location.href = result.redirect;
                 }
             });

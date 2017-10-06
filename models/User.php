@@ -5,7 +5,6 @@ namespace OFFLINE\Cashier\Models;
 use Exception;
 use Illuminate\Support\Collection;
 use Laravel\Cashier\Billable;
-use Laravel\Cashier\Subscription;
 use RainLab\User\Models\User as UserBase;
 use Stripe\Invoice as StripeInvoice;
 
@@ -26,6 +25,14 @@ class User extends UserBase
                                     ->firstOrFail(['user_id']);
 
         return static::with('subscriptions')->findOrFail($subscription->user_id);
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(
+            Subscription::class,
+            $this->getForeignKey()
+        )->orderBy('created_at', 'desc');
     }
 
     /**

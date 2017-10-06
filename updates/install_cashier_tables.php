@@ -15,7 +15,7 @@ class InstallCashierTables extends Migration
             $table->timestamp('trial_ends_at')->nullable();
         });
 
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create('offline_cashier_subscriptions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->string('name');
@@ -30,7 +30,7 @@ class InstallCashierTables extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('offline_cashier_subscriptions');
         Schema::table('users', function (Blueprint $table) {
             $columns = ['stripe_id', 'card_brand', 'card_last_four', 'trial_ends_at'];
             if (Schema::hasColumns('users', $columns)) {

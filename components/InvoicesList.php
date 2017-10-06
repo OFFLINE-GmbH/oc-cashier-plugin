@@ -42,7 +42,7 @@ class InvoicesList extends ComponentBase
                 'title'       => 'offline.cashier::lang.components.invoicesList.properties.includePending.title',
                 'description' => 'offline.cashier::lang.components.invoicesList.properties.includePending.description',
             ],
-            'loadingText' => [
+            'loadingText'    => [
                 'type'        => 'text',
                 'default'     => 'Loading invoices...',
                 'title'       => 'offline.cashier::lang.components.invoicesList.properties.loadingText.title',
