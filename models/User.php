@@ -4,7 +4,7 @@ namespace OFFLINE\Cashier\Models;
 
 use Exception;
 use Illuminate\Support\Collection;
-use Laravel\Cashier\Billable;
+use OFFLINE\Cashier\Classes\Billable;
 use RainLab\User\Models\User as UserBase;
 use Stripe\Invoice as StripeInvoice;
 
@@ -21,7 +21,7 @@ class User extends UserBase
 
     public static function fromSubscriptionId($subscriptionId)
     {
-        $subscription = Subscription::where('stripe_id', $subscriptionId)
+        $subscription = Subscription::where('offline_cashier_stripe_id', $subscriptionId)
                                     ->firstOrFail(['user_id']);
 
         return static::with('subscriptions')->findOrFail($subscription->user_id);
