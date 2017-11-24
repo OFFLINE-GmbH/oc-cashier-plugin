@@ -21,7 +21,7 @@ class User extends UserBase
 
     public static function fromSubscriptionId($subscriptionId)
     {
-        $subscription = Subscription::where('offline_cashier_stripe_id', $subscriptionId)
+        $subscription = Subscription::where('stripe_id', $subscriptionId)
                                     ->firstOrFail(['user_id']);
 
         return static::with('subscriptions')->findOrFail($subscription->user_id);
