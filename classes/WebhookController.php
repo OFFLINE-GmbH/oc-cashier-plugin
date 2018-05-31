@@ -32,4 +32,17 @@ class WebhookController extends CashierWebhookController
     {
         return new Response;
     }
+
+    /**
+     * Get the billable entity instance by Stripe ID.
+     *
+     * @param  string  $stripeId
+     * @return \Laravel\Cashier\Billable
+     */
+    protected function getUserByStripeId($stripeId)
+    {
+        $model = getenv('STRIPE_MODEL') ?: config('services.stripe.model');
+
+        return (new $model)->where('offline_cashier_stripe_id', $stripeId)->first();
+    }
 }
