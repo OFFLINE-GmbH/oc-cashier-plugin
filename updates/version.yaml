@@ -3,3 +3,5 @@
     - install_cashier_tables.php
 1.0.2:
     - 'Fixed bug in fromSubscriptionId method'
+1.0.3:
+    - 'Fixed bug when user tries to unsubscribe'
