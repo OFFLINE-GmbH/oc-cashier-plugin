@@ -5,3 +5,5 @@
     - 'Fixed bug in fromSubscriptionId method'
 1.0.3:
     - 'Fixed bug when user tries to unsubscribe'
+1.0.4:
+    - 'Fixed dependency declaration for RainLab.User (thanks to therealkevinard)'
