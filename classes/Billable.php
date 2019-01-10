@@ -589,6 +589,16 @@ trait Billable
     }
 
     /**
+     * Get the stripe_id attribute.
+     *
+     * @return string
+     */
+    public function getStripeIdAttribute()
+    {
+        return $this->offline_cashier_stripe_id;
+    }
+
+    /**
      * Get the Stripe API key.
      *
      * @return string
