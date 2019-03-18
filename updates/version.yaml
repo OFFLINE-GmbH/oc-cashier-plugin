@@ -9,3 +9,6 @@
     - 'Fixed dependency declaration for RainLab.User (thanks to therealkevinard)'
 1.0.5:
     - 'Fixed problem with subscription ids (thanks to Adrion)'
+1.0.6:
+    - 'Added missing import'
+

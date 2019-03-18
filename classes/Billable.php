@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use InvalidArgumentException;
 use Laravel\Cashier\Billable as CashierBillable;
 use Laravel\Cashier\Card;
+use Laravel\Cashier\Cashier;
 use Laravel\Cashier\SubscriptionBuilder;
 use Stripe\Card as StripeCard;
 use Stripe\Token as StripeToken;
