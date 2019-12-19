@@ -11,4 +11,6 @@
     - 'Fixed problem with subscription ids (thanks to Adrion)'
 1.0.6:
     - 'Added missing import'
+1.0.7:
+    - 'Optimized the extension of RainLab User models'
 
