@@ -17,17 +17,13 @@ class Plugin extends PluginBase
     public function boot()
     {
         App::register(CashierServiceProvider::class);
+        App::singleton('user.auth', function () {
+            return \OFFLINE\Cashier\Classes\AuthManager::instance();
+        });
         Cashier::useCurrency(
             Settings::get('currency_currency', 'USD'),
             Settings::get('currency_symbol', '$')
         );
-    }
-
-    public function register()
-    {
-        App::singleton('user.auth', function () {
-            return \OFFLINE\Cashier\Classes\AuthManager::instance();
-        });
     }
 
     public function registerComponents()
