@@ -1,5 +1,10 @@
 {
+  "name": "offline/oc-cashier-plugin",
+  "description": "October CMS plugin to handle Stripe and Braintree payments using Laravel Cashier",
+  "type": "october-plugin",
+  "license": "MIT",
   "require": {
-    "laravel/cashier": "^7.0"
+    "laravel/cashier": "^7.0",
+    "composer/installers": "~1.0"
   }
 }
