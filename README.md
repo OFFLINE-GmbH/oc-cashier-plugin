@@ -163,6 +163,27 @@ If you need to extend the subscription logic you can listen for the `offline.cas
 
 If you return `true` from any event listener the user will be allowed to view the page. If you return `false` from any event listener the user will be redirected. Please be aware that any `true` value takes precedence. If you don't return any `boolean` value the check will fallback to Laravel Cashier's `subscribed` method.
 
+
+##### Extend the subscription logic
+
+If you need to extend the subscription logic you can listen for the `offline.cashier::subscription.check` event. The event receives the `user` and the `NeedsSubscription` component instance.
+
+If you return `true` from any event listener the user will be allowed to view the page. If you return `false` from any event listener the user will be redirected. Please be aware that any `true` value takes precedence. If you don't return any `boolean` value the check will fallback to Laravel Cashier's `subscribed` method.
+
+```php
+ Event::listen('offline.cashier::subscription.check', function ($user, $component) {
+    if ( ! $user) {
+        return false;
+    }
+
+    if (isBanned($user) {
+        return false;
+    }
+
+    return $user->subscribed($component->property('subscription'));
+});
+```
+
 #### Properties
 
 ##### redirect
