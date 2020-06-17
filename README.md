@@ -176,7 +176,7 @@ If you return `true` from any event listener the user will be allowed to view th
         return false;
     }
 
-    if (isBanned($user) {
+    if (isBanned($user)) {
         return false;
     }
 
