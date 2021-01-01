@@ -1,6 +1,7 @@
 <?php
 
 use OFFLINE\Cashier\Models\Settings;
+use RainLab\User\Models\User;
 
 /**
  * Invoice Downloads
@@ -11,7 +12,7 @@ Route::get('/cashier/invoice/{user}/{invoice}', function ($user, $invoice) {
     $userId    = decrypt($user);
     $invoiceId = decrypt($invoice);
 
-    $user = \OFFLINE\Cashier\Models\User::whereId($userId)->firstOrFail();
+    $user = User::findOrFail($userId);
 
     return $user->downloadInvoice($invoiceId, [
         'vendor'  => Settings::get('invoice_vendor', 'Your Vendor'),

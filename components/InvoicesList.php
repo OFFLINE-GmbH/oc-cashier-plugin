@@ -2,7 +2,7 @@
 
 use Auth;
 use Cms\Classes\ComponentBase;
-use OFFLINE\Cashier\Models\User;
+use RainLab\User\Models\User;
 use Session;
 
 class InvoicesList extends ComponentBase

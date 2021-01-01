@@ -1,13 +1,13 @@
 <?php namespace OFFLINE\Cashier;
 
-use App;
-use Config;
+use Illuminate\Support\Facades\App;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\CashierServiceProvider;
 use OFFLINE\Cashier\Components\InvoicesList;
 use OFFLINE\Cashier\Components\NeedsSubscription;
 use OFFLINE\Cashier\Components\StripeElementsForm;
 use OFFLINE\Cashier\Models\Settings;
+use RainLab\User\Models\User;
 use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
@@ -17,13 +17,14 @@ class Plugin extends PluginBase
     public function boot()
     {
         App::register(CashierServiceProvider::class);
-        App::singleton('user.auth', function () {
-            return \OFFLINE\Cashier\Classes\AuthManager::instance();
-        });
         Cashier::useCurrency(
             Settings::get('currency_currency', 'USD'),
             Settings::get('currency_symbol', '$')
         );
+
+        User::extend(static function ($user) {
+            $user->implement[] = 'OFFLINE.Cashier.Classes.Billable';
+        });
     }
 
     public function registerComponents()
