@@ -1,6 +1,4 @@
-<?php
-
-namespace OFFLINE\Cashier\Classes;
+<?php namespace OFFLINE\Cashier\Classes;
 
 
 use Event;
@@ -19,18 +17,6 @@ class WebhookController extends CashierWebhookController
         Event::fire('offline.cashier::stripe.webhook.' . $payload['type'], [$payload, $request]);
 
         return parent::handleWebhook($request);
-    }
-
-    /**
-     * Handle calls to missing methods on the controller.
-     *
-     * @param  array $parameters
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function missingMethod($parameters = [])
-    {
-        return new Response;
     }
 
     /**
