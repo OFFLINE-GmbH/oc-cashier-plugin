@@ -6,7 +6,7 @@
     // Create a Stripe client
     var stripe = Stripe('{{ stripeKey }}');
 
-    {% partial __SELF__ ~ '::tokenHandler.js' %}
+    {% partial __SELF__ ~ '::tokenHandler' %}
 
     // Create an instance of Elements
     var elements = stripe.elements();
