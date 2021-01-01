@@ -1,7 +1,4 @@
-<?php
-
-namespace OFFLINE\Cashier\Models;
-
+<?php namespace OFFLINE\Cashier\Models;
 
 use Laravel\Cashier\Subscription as CashierSubscription;
 

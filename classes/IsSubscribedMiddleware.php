@@ -1,9 +1,6 @@
-<?php
-
-namespace OFFLINE\Cashier\Classes;
+<?php namespace OFFLINE\Cashier\Classes;
 
 use Closure;
-use Config;
 
 class IsSubscribedMiddleware
 {
