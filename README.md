@@ -14,7 +14,7 @@ In `config/services.php` replace the `stripe` configuration with the following:
  
  ```php
 'stripe' => [
-    'model'   => \OFFLINE\Cashier\Models\User::class,
+    'model'   => \RainLab\User\Models\User::class,
     'key'     => env('STRIPE_KEY'),
     'secret'  => env('STRIPE_SECRET'),
     'webhook' => [
@@ -35,10 +35,6 @@ Make sure to include the [October CMS framework extras](http://octobercms.com/do
 
 You're done!
 
-## Use the Cashier specific User Model
-
-To have access to the `subscriptions` relationship and other October CMS optimizations make sure to always use `OFFLINE\Cashier\Models\User` instead of `RainLab\User\Models\User` and you are good to go. The `Auth` service gets patched to always return the right model automatically.
-
 ## Handle Stripe Webhooks
 
 To receive Stripe webhooks configure Stripe to send them to `https://<your-site>/stripe/webhook` (you can change this URL via the `services.stripe.webhook.url` config entry).
@@ -51,7 +47,7 @@ Alternatively you can set your own webhook handler controller in the `services.s
 Event::listen('offline.cashier::stripe.webhook.invoice.payment_succeeded', function ($payload, $request) {
     $subscription = $payload['data']['object']['subscription'];
     
-    $user = \OFFLINE\Cashier\Models\User::fromSubscriptionId($subscription);
+    $user = \RainLab\User\Models\User::fromSubscriptionId($subscription);
 
     $user->payment_succeeded_at = \Carbon\Carbon::now();
     $user->save();
