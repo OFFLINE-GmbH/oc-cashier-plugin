@@ -15,6 +15,8 @@
     - 'Optimized the extension of RainLab User models'
 1.0.8:
     - 'Fixed composer support'
+1.0.9:
+    - '!!! The stripeelementsform/tokenHandler.js partial has been renamed to .htm to be compatible with newer October versions. If you are overriding this partial make sure to rename your partial as well.'
 2.0.0:
     - "!!! Updated Cashier to v9.0. This update contains breaking changes. Visit the project's README on GitHub for more information. (Credits to @RomainMazB for the work on this update!)"
 
