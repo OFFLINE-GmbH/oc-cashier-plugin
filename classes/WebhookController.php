@@ -1,12 +1,9 @@
-<?php
-
-namespace OFFLINE\Cashier\Classes;
+<?php namespace OFFLINE\Cashier\Classes;
 
 
 use Event;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Http\Controllers\WebhookController as CashierWebhookController;
-use Symfony\Component\HttpFoundation\Response;
 
 class WebhookController extends CashierWebhookController
 {
@@ -22,21 +19,9 @@ class WebhookController extends CashierWebhookController
     }
 
     /**
-     * Handle calls to missing methods on the controller.
-     *
-     * @param  array $parameters
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function missingMethod($parameters = [])
-    {
-        return new Response;
-    }
-
-    /**
      * Get the billable entity instance by Stripe ID.
      *
-     * @param  string  $stripeId
+     * @param string $stripeId
      * @return \Laravel\Cashier\Billable
      */
     protected function getUserByStripeId($stripeId)

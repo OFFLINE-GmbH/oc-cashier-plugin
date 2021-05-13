@@ -2,7 +2,7 @@
 
 use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
-use Schema;
+use October\Rain\Support\Facades\Schema;
 
 class InstallCashierTables extends Migration
 {
