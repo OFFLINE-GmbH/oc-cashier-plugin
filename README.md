@@ -2,8 +2,6 @@
 
 October CMS plugin to handle Stripe and Braintree payments using [Laravel Cashier](https://laravel.com/docs/5.5/billing).
 
-> **Caution:** This plugin only works with Laravel 5.5 based October CMS installations (Build 420+). Older builds are not supported!
-
 This plugin integrates Laravel Cashier with the help of [Rainlab.User](https://github.com/rainlab/user-plugin) into October CMS. You can do "one-off" charges on your Rainlab users or subscribe them to your Stripe plans.
 
 The plugin comes preloaded with simple Stripe Elements form and invoice list components. All features of Laravel Cashier are available. An easily customizable invoice view and some useful events have been added for this October CMS version of Cashier.
