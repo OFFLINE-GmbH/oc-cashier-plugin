@@ -1,67 +1,70 @@
 {% put scripts %}
-{% if includeStripeJs %}
-    <script src="https://js.stripe.com/v3/"></script>
-{% endif %}
-<script>
-    // Create a Stripe client
-    var stripe = Stripe('{{ stripeKey }}');
+    {% if includeStripeJs %}
+        <script src="https://js.stripe.com/v3/"></script>
+    {% endif %}
+    <script>
+        $(function () {
 
-    {% partial __SELF__ ~ '::tokenHandler' %}
+            // Create a Stripe client
+            var stripe = Stripe('{{ stripeKey }}');
 
-    // Create an instance of Elements
-    var elements = stripe.elements();
+            {% partial __SELF__ ~ '::tokenHandler' %}
 
-    // Custom styling can be passed to options when creating an Element.
-    // (Note that this demo uses a wider set of styles than the guide below.)
-    var style = {
-        base: {
-            color: '#32325d',
-            lineHeight: '24px',
-            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-            fontSmoothing: 'antialiased',
-            fontSize: '16px',
-            '::placeholder': {
-                color: '#aab7c4'
-            }
-        },
-        invalid: {
-            color: '#fa755a',
-            iconColor: '#fa755a'
-        }
-    };
+            // Create an instance of Elements
+            var elements = stripe.elements();
 
-    // Create an instance of the card Element
-    var card = elements.create('card', {style: style});
+            // Custom styling can be passed to options when creating an Element.
+            // (Note that this demo uses a wider set of styles than the guide below.)
+            var style = {
+                base: {
+                    color: '#32325d',
+                    lineHeight: '24px',
+                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                    fontSmoothing: 'antialiased',
+                    fontSize: '16px',
+                    '::placeholder': {
+                        color: '#aab7c4'
+                    }
+                },
+                invalid: {
+                    color: '#fa755a',
+                    iconColor: '#fa755a'
+                }
+            };
 
-    // Add an instance of the card Element into the `card-element` <div>
-    card.mount('#card-element');
+            // Create an instance of the card Element
+            var card = elements.create('card', {style: style});
 
-    card.addEventListener('change', function (event) {
-        var displayError = document.getElementById('card-errors');
-        if (event.error) {
-            displayError.textContent = event.error.message;
-        } else {
-            displayError.textContent = '';
-        }
-    });
+            // Add an instance of the card Element into the `card-element` <div>
+            card.mount('#card-element');
 
-    var form = document.getElementById('payment-form');
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
+            card.addEventListener('change', function (event) {
+                var displayError = document.getElementById('card-errors');
+                if (event.error) {
+                    displayError.textContent = event.error.message;
+                } else {
+                    displayError.textContent = '';
+                }
+            });
 
-        $submit.prop('disabled', true).text('{{ submitButtonLabel }}');
+            var form = document.getElementById('payment-form');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
 
-        stripe.createToken(card).then(function (result) {
-            if (result.error) {
-                // Inform the user if there was an error
-                var errorElement = document.getElementById('card-errors');
-                errorElement.textContent = result.error.message;
-                $submit.prop('disabled', false).text(oldSubmitText);
-            } else {
-                // Send the token to your server
-                stripeTokenHandler(result.token);
-            }
-        });
-    });
-</script>
+                $submit.prop('disabled', true).text('{{ submitButtonLabel }}');
+
+                stripe.createToken(card).then(function (result) {
+                    if (result.error) {
+                        // Inform the user if there was an error
+                        var errorElement = document.getElementById('card-errors');
+                        errorElement.textContent = result.error.message;
+                        $submit.prop('disabled', false).text(oldSubmitText);
+                    } else {
+                        // Send the token to your server
+                        stripeTokenHandler(result.token);
+                    }
+                });
+            });
+        })
+    </script>
 {% endput %}

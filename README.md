@@ -8,6 +8,20 @@ This plugin integrates Laravel Cashier with the help of [Rainlab.User](https://g
 
 The plugin comes preloaded with simple Stripe Elements form and invoice list components. All features of Laravel Cashier are available. An easily customizable invoice view and some useful events have been added for this October CMS version of Cashier.
 
+## Breaking changes in v2.0.0
+
+In version 2.0.0 of this plugin Laravel Cashier was updated to version 9.0. This makes the plugin
+compatible with Laravel 5 and Laravel 6 based October versions.
+
+With this update, some architectural problems with the plugins have been solved that might introduce
+breaking changes depending on your setup:
+
+* The `\OFFLINE\Cashier\Models\User` was removed completely. Use `\RainLab\User\Models\User` in its place.
+* Because the custom User model was removed, you have to make sure any relations that might point to the old
+  model class are moved to the RainLab.User model.
+* The `stripeelementsform/script.js` partial was renamed to `script.htm`. If you override this partial
+  make sure to rename your overriding partial as well.
+
 ## Installation
 
 In `config/services.php` replace the `stripe` configuration with the following:
@@ -102,7 +116,7 @@ Simply add the component **to your page** and you will be presented with a simpl
 
 #### Token Handler Callback
 
-To extend the default `stripeTokenHandler` function that receives the generated Stripe token, simply copy the `plugins/offline/cashier/components/stripeelementsform/tokenHandler.js` to `themes/<yourtheme>/partials/stripeElementsForms/tokenHandler.js` and modify as needed.
+To extend the default `stripeTokenHandler` function that receives the generated Stripe token, copy the `plugins/offline/cashier/components/stripeelementsform/tokenHandler.htm` to `themes/<yourtheme>/partials/stripeElementsForms/tokenHandler.htm` and modify as needed.
 
 #### Handle form submission
 

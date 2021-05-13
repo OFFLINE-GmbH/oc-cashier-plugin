@@ -15,4 +15,6 @@
     - 'Optimized the extension of RainLab User models'
 1.0.8:
     - 'Fixed composer support'
+2.0.0:
+    - "!!! Updated Cashier to v9.0. This update contains breaking changes. Visit the project's README on GitHub for more information. (Credits to @RomainMazB for the work on this update!)"
 

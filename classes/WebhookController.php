@@ -4,7 +4,6 @@
 use Event;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Http\Controllers\WebhookController as CashierWebhookController;
-use Symfony\Component\HttpFoundation\Response;
 
 class WebhookController extends CashierWebhookController
 {
@@ -22,7 +21,7 @@ class WebhookController extends CashierWebhookController
     /**
      * Get the billable entity instance by Stripe ID.
      *
-     * @param  string  $stripeId
+     * @param string $stripeId
      * @return \Laravel\Cashier\Billable
      */
     protected function getUserByStripeId($stripeId)

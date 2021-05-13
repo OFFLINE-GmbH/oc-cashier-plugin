@@ -22,9 +22,11 @@ class Plugin extends PluginBase
             Settings::get('currency_symbol', '$')
         );
 
-        User::extend(static function ($user) {
-            $user->implement[] = 'OFFLINE.Cashier.Classes.Billable';
-        });
+        if (class_exists(User::class)) {
+            User::extend(static function ($user) {
+                $user->implement[] = 'OFFLINE.Cashier.Classes.Billable';
+            });
+        }
     }
 
     public function registerComponents()

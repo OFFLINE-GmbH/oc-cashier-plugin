@@ -1,12 +1,9 @@
 <?php namespace OFFLINE\Cashier\Classes;
 
-use Dompdf\Dompdf;
 use October\Rain\Extension\ExtensionBase;
+use OFFLINE\Cashier\Models\Subscription;
 use Stripe\Customer as StripeCustomer;
 use Stripe\Token as StripeToken;
-use OFFLINE\Cashier\Models\Subscription;
-use Symfony\Component\HttpFoundation\Response;
-use System\Traits\ViewMaker;
 
 class Billable extends ExtensionBase
 {
@@ -16,7 +13,10 @@ class Billable extends ExtensionBase
 
     /** @var string[] Columns that need to be overridden for OC */
     protected $renamedColumns = [
-        'stripe_id', 'card_brand', 'card_last_four', 'trial_ends_at'
+        'stripe_id',
+        'card_brand',
+        'card_last_four',
+        'trial_ends_at'
     ];
 
     public function __construct($parent)
@@ -27,8 +27,10 @@ class Billable extends ExtensionBase
         $this->parent->hasMany['subscriptions'] = [Subscription::class, 'order' => 'created_at desc'];
     }
 
-    /** subscriptions is needed when method is called directly
-     *      so the Cashier Billable method is never called
+    /**
+     * Subscriptions is needed when method is called directly
+     * so the Cashier Billable method is never called
+     *
      * @return mixed
      */
     public function subscriptions()
@@ -36,9 +38,11 @@ class Billable extends ExtensionBase
         return $this->hasMany(Subscription::class)->orderBy('created_at', 'desc');
     }
 
-    /** Overridden to fix compatibility between the old Cashier version and the new Stripe API
-     *      sources and subscriptions are not returned as default
-     *      see https://stripe.com/docs/upgrades#2020-08-27
+    /**
+     * Overridden to fix compatibility between the old Cashier version and the new Stripe API
+     * sources and subscriptions are not returned as default
+     *
+     * @see https://stripe.com/docs/upgrades#2020-08-27
      * @return StripeCustomer
      */
     public function asStripeCustomer()
@@ -49,7 +53,9 @@ class Billable extends ExtensionBase
         ], $this->getStripeKey());
     }
 
-    /** Overridden to fix compatibility between the old Cashier version and the new Stripe API
+    /**
+     * Overridden to fix compatibility between the old Cashier version and the new Stripe API
+     *
      * @param array $options
      * @return mixed
      */
@@ -68,15 +74,14 @@ class Billable extends ExtensionBase
 
         $this->save();
 
-        /**
-         * FIX IS HERE: In cashier, the $customer object is directly returned, but it doesn't includes the subscriptions
-         *      subscriptions is needed into SubscriptionBuilder in line 205
-         *      so we fetch asStripeCustomer which include them
-         */
+        // In cashier, the $customer object is directly returned, but it doesn't include the subscriptions
+        // which are needed in SubscriptionBuilder. By calling asStripeCustomer we get all required data.
         return $this->parent->asStripeCustomer();
     }
 
-    /** Overridden to fix compatibility between the old Cashier version and the new Stripe API
+    /**
+     * Overridden to fix compatibility between the old Cashier version and the new Stripe API
+     *
      * @param $token
      * @return mixed
      */
@@ -87,7 +92,7 @@ class Billable extends ExtensionBase
         $token = StripeToken::retrieve($token, ['api_key' => $this->getStripeKey()]);
 
         if ($token[$token->type]->id === $customer->default_source) {
-            return;
+            return null;
         }
 
         $card = $customer->sources->create(['source' => $token]);
@@ -95,18 +100,11 @@ class Billable extends ExtensionBase
 
         $customer->save();
 
-        /**
-         * FIX IS HERE: In cashier, the $customer object is directly returned, but it doesn't includes the sources.
-         *      Cashier was previously asking for sources($this->default_source)
-         *      because default_source = just created card we can safely use the $card instance directly
-         */
-        $source = $customer->default_source
-            ? $card
-            : null;
-
-        $this->fillCardDetails($source);
+        $this->fillCardDetails($customer->default_source ? $card : null);
 
         $this->save();
+
+        return $card;
     }
 
     /**
@@ -122,7 +120,7 @@ class Billable extends ExtensionBase
     public function __get($name)
     {
         if (in_array($name, $this->renamedColumns, true)) {
-            return $this->parent->{'offline_cashier_'.$name};
+            return $this->parent->{'offline_cashier_' . $name};
         }
 
         return $this->parent->$name;
@@ -131,7 +129,7 @@ class Billable extends ExtensionBase
     public function __set($name, $value)
     {
         if (in_array($name, $this->renamedColumns, true)) {
-            return $this->parent->{'offline_cashier_'.$name} = $value;
+            return $this->parent->{'offline_cashier_' . $name} = $value;
         }
 
         return $this->parent->$name = $value;
