@@ -4,7 +4,7 @@
     "type": "october-plugin",
     "license": "MIT",
     "require": {
-        "laravel/cashier": "^9.0",
+        "laravel/cashier": "^13.0",
         "composer/installers": "~1.0"
     }
 }

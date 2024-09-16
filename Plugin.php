@@ -17,10 +17,6 @@ class Plugin extends PluginBase
     public function boot()
     {
         App::register(CashierServiceProvider::class);
-        Cashier::useCurrency(
-            Settings::get('currency_currency', 'USD'),
-            Settings::get('currency_symbol', '$')
-        );
 
         if (class_exists(User::class)) {
             User::extend(static function ($user) {
